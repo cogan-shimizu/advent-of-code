@@ -1,5 +1,5 @@
-# with open("aoc-5.txt") as f:
-with open("aoc-5-test.txt") as f:
+with open("aoc-5.txt") as f:
+# with open("aoc-5-test.txt") as f:
 	lines = [line[:-1] for line in f.readlines()]
 
 	stack_rows = list()
@@ -26,5 +26,32 @@ with open("aoc-5-test.txt") as f:
 			if block != "[0]":
 				stacks[i].append(block)
 
+	for stack in stacks:
+		print(stack)
+
+	def move_crates(source, target, num, stacks):
+		if num == 0:
+			return
+
+		crate = stacks[source].pop()
+		stacks[target].append(crate)
+
+		move_crates(source, target, num-1, stacks)
+
 	for line in lines[nl+1:]:
-		pass
+		print(line)
+		# parse the code
+		move, num, frum, source, to, target = line.split(" ")
+		num = int(num)
+		source = int(source) - 1 # zero index, one label
+		target = int(target) - 1 # zero index, one label
+
+		move_crates(source, target, num, stacks)
+
+	tops = ""
+	for stack in stacks:
+		if len(stack) > 0:
+			top = stack[-1]
+			label = top[1:-1]
+			tops += label
+	print(tops)
