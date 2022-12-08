@@ -29,14 +29,18 @@ with open("aoc-5.txt") as f:
 	for stack in stacks:
 		print(stack)
 
+	# def move_crates(source, target, num, stacks):
+	# 	if num == 0:
+	# 		return
+
+	# 	crate = stacks[source].pop()
+	# 	stacks[target].append(crate)
+
+	# 	move_crates(source, target, num-1, stacks)
 	def move_crates(source, target, num, stacks):
-		if num == 0:
-			return
-
-		crate = stacks[source].pop()
-		stacks[target].append(crate)
-
-		move_crates(source, target, num-1, stacks)
+		crates = stacks[source][-num:]
+		stacks[source] = stacks[source][:-num]
+		stacks[target] += crates
 
 	for line in lines[nl+1:]:
 		print(line)
