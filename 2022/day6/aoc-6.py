@@ -4,14 +4,15 @@ with open("aoc-6.txt") as f:
 
 	print(signal)
 
+	start_packet_length = 14
 	count = 0
 	for i, marker in enumerate(signal):
 		# Skip the first three attempts
-		if i < 4:
+		if i < start_packet_length:
 			count += 1
 			continue
 
-		window = signal[i-4:i]
+		window = signal[i-start_packet_length:i]
 		if len(window) != len(set(window)):
 			count += 1
 		else:
