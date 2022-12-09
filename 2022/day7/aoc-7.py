@@ -47,17 +47,25 @@ with open("aoc-7.txt") as f:
 			size = int(size)
 			dirs[dir_path]["files"].append(size)
 
-	count = 0
 	total = 0
+	candidates = list()
+	free_space = 70000000 - compute_size("/", dirs)
+	need_to_free = 30000000 - free_space
+	print(free_space)
+	print(need_to_free)
 	for d in dirs.keys():
 		s = compute_size(d, dirs)
+
+		if s >= need_to_free:
+			candidates.append(s)
+
 		if s <= 100000:
-			print(f"{d}: {s} < 100000")
+			# print(f"{d}: {s} < 100000")
 			total += s
 		else:
-			print(f"{d}: {s}")
-		count += 1
-
+			# print(f"{d}: {s}")
+			pass
 	print(total)
-	print(count)
 
+	print(candidates)
+	print(min(candidates))
