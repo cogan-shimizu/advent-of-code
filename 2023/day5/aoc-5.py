@@ -1,6 +1,6 @@
 seqs = ["soil", "fertilizer", "water", "light", "temperature", "humidity", "location"]
 
-with open("aoc-5.txt") as f:
+with open("aoc-5-test.txt") as f:
 	lines = f.readlines()
 
 	seeds = lines[0].strip()
@@ -33,7 +33,7 @@ with open("aoc-5.txt") as f:
 			tar, src, rng = map(int, mapping.split(" "))
 			if val < src:
 				return val
-			elif val <= src + rng:
+			elif val < src + rng:
 				return tar + (val - src)
 			else:
 				continue
@@ -44,7 +44,6 @@ with open("aoc-5.txt") as f:
 		curr = "seed"
 		for seq in seqs:
 			mapped = map_val(val, seq)
-			# print(f"{curr}: {val} -> {seq}: {mapped}")
 			val = mapped
 		return val # location
 
