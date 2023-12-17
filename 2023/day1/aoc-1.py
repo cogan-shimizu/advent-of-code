@@ -1,3 +1,4 @@
+# Mappings
 num_pairs = [("one", "1"),
 ("two", "2"),
 ("three", "3"),
@@ -8,9 +9,13 @@ num_pairs = [("one", "1"),
 ("eight", "8"),
 ("nine", "9")]
 
+# Convenience
 def reverse_string(s):
 	return s[::-1]
 
+# replace strictly the first and last occurrence
+# of a number string, if necessary
+# otherwise return the first found digit
 def iter_replace(s):
 	left, right = "", ""
 	for i in range(len(s)):
@@ -42,6 +47,7 @@ with open("aoc-1.txt", "r") as f:
 	cal = 0
 	for line in lines:
 		line = iter_replace(line)
+		# I guess I could have just returned the number...
 		num = int(''.join(line))
 		cal += num
 	print(cal)
